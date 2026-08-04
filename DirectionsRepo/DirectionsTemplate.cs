@@ -5,7 +5,43 @@ public class GetPosition : MonoBehaviour
 {
     [SerializeField]
  
+private void OnEnable()
+    {
+        Debug.Log("Enabling Getters");
+        Messenger.AddListener(GameMessages.COORIDINATES, OnCoordinatesChanged);
+        Messenger.AddListener(GameMessages.HEADING, OnHeadingChanged);
+        Messenger.AddListener(GameMessages.TIME, OnTimeChanged);
+        InputSystem.actions.Enable();
+    }
+    private void OnDisable()
+    {
+        Messenger.RemoveListener(GameMessages.COORIDINATES, OnCoordinatesChanged);
+        Messenger.RemoveListener(GameMessages.HEADING, OnHeadingChanged);
+        Messenger.RemoveListener(GameMessages.TIME, OnTimeChanged);
+        InputSystem.actions.Disable();
+    }
+    private void Start()
+    {
 
+      // for every x time
+       getPosition();
+       getRotation();
+       getTime();
+       Debug.Log("Time: " + getTime());
+       sleep(1);
+    }
+    void OnCoordinatesChanged()
+    {
+        getPosition();
+    }
+    void OnHeadingChanged()
+    {
+        getRotation();
+    }
+    void OnTimeChanged()
+    {
+        getTime();
+    }
     private void Update()
     {
         
