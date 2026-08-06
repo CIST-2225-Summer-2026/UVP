@@ -13,6 +13,13 @@
  
         return moveDirection;
     }
+        private void Start()
+    {
+        var speed = 1 + GetPosition.getPosition();
+        time = GetPosition.getTime();
+        Debug.Log("Time: " + time);
+        // when time passes x seconds, move robot forward
+    }
 private void Update()
     {
         var speed = 1 + GetPosition.getPosition();
